@@ -10,3 +10,5 @@ For now, this template supports armv-7
 
 
 ![](https://i.imgur.com/q4KTFED.jpeg)
+
+![](https://i.imgur.com/SY6djkG.jpeg)
