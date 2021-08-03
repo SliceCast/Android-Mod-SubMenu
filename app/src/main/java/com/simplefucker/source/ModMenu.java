@@ -146,15 +146,15 @@ public class ModMenu extends Service {
 
     native String IconWebViewData();
 
-    native String[] getFeatureList();
+    //native String[] getFeatureList();
     native String[] getSettings();
     native String[] getPlayer();
 
     native String[] getVisuals();
 
-    native String[] getWeapon();
+    //native String[] getWeapon();
 
-    native String[] getMisc();
+    //native String[] getMisc();
 
     native String[] settingsList();
 
@@ -189,7 +189,7 @@ public class ModMenu extends Service {
         });
     }
     public enum Category {
-        hacks ,  visuals ,  extra , other ,
+        hacks ,  visuals ,
     }
 
 
@@ -202,14 +202,6 @@ public class ModMenu extends Service {
         /*****************************************/
         if (category == Category. visuals ) {
             addlinears(getVisuals(),patches);
-        }
-        /*****************************************/
-        if (category == Category. extra ) {
-            addlinears(getMisc(),patches);
-        }
-        /*****************************************/
-        if (category == Category. other ) {
-            addlinears(getWeapon(),patches);
         }
         /*****************************************/
     }
@@ -338,7 +330,7 @@ public class ModMenu extends Service {
 
         Button hideBtn = new Button(this);
         hideBtn.setBackgroundColor(Color.TRANSPARENT);
-        byte[] els$$ = Base64.decode("VjEgVkVSU0lPTg==",0);
+        byte[] els$$ = Base64.decode("KEV4Y2x1c2l2ZSEp",0);
         hideBtn.setText(new String(els$$));
         hideBtn.setTextColor(TEXT_COLOR);
 
@@ -389,20 +381,20 @@ public class ModMenu extends Service {
     }
     public void InseratbleBtn(String text, View.OnClickListener click){
         TextView title = new TextView(this);
-        title.setPadding(0, 0, 0, 0);
+        title.setPadding(0, 0, 0, 10);
         title.setText(text);
         title.setTextColor(TEXT_COLOR);
         title.setOnClickListener(click);
         title.setTypeface(Typeface.DEFAULT_BOLD);
-        title.setTextSize(15.0f);
+        title.setTextSize(13.0f);
         title.setGravity(Gravity.CENTER);
         title.setBackground(MENU_FEATURE_BG_COLOR_GRADIENT);
         RelativeLayout.LayoutParams rl = new RelativeLayout.LayoutParams(convertDipToPixels(45), WRAP_CONTENT);
-        rl.setMargins(20,0,0,0);
+        rl.setMargins(10,0,0,0);
         title.setLayoutParams(rl);
         final LinearLayout cec = new LinearLayout(this);
-        cec.setPadding(0, 0, 0,  0);
-        cec.setLayoutParams(new LinearLayout.LayoutParams(WRAP_CONTENT,convertDipToPixels(1)));
+        cec.setPadding(0, 0, 130,  500);
+        cec.setLayoutParams(new LinearLayout.LayoutParams(WRAP_CONTENT,convertDipToPixels(0)));
         cec.setOrientation(LinearLayout.HORIZONTAL);
         cec.setBackground(gdMenuStroke);
         titleText.addView(title);
