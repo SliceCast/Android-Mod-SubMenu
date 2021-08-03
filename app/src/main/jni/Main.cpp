@@ -22,24 +22,15 @@
 
 #include <And64InlineHook/And64InlineHook.hpp>
 
-#define HOOK(offset, ptr, orig) A64HookFunction((void *)getAbsoluteAddress(targetLibIL2CPP, string2Offset(OBFUSCATE_KEY(offset, 23479432523588))), (void *)ptr, (void **)&orig)
+#define HOOK(offset, ptr, orig) A64HookFunction((void *)offset, (void *)ptr, (void **)&orig)
 
 #else
 
 #include <Substrate/CydiaSubstrate.h>
 
-#define HOOK(offset, ptr, orig) MSHookFunction((void *)getAbsoluteAddress(targetLibIL2CPP, string2Offset(OBFUSCATE_KEY(offset, 23479432523588))), (void *)ptr, (void **)&orig)
+#define HOOK(offset, ptr, orig) MSHookFunction((void *)offset, (void *)ptr, (void **)&orig)
 
 #endif
-
-void hooking(void *orig_fcn, void* new_fcn, void **orig_fcn_ptr)
-{
-#if defined(__aarch64__)
-    A64HookFunction(orig_fcn, new_fcn, orig_fcn_ptr);
-#else
-    MSHookFunction(orig_fcn, new_fcn, orig_fcn_ptr);
-#endif
-}
 
 //!!! KittyMemory || Hex-Patching !!!//
 struct My_Patches {
@@ -54,9 +45,10 @@ bool isTest, isTest2;
 //!!! Hooks !!!//
 
 bool (*_method)(void *instance);
+
 bool method(void *instance) {
-    if (instance != NULL){
-        if(isTest) {
+    if (instance != NULL) {
+        if (isTest) {
             return true;
         }
     }
@@ -64,9 +56,10 @@ bool method(void *instance) {
 }
 
 int (*_method2)(void *instance);
-int method2(void *instance){
+
+int method2(void *instance) {
     if (instance != NULL) {
-        if(isTest2) {
+        if (isTest2) {
             return 99;
         }
     }
@@ -82,21 +75,19 @@ void *hack_thread(void *) {
 
     LOGI(OBFUSCATE("%s has been loaded"), (const char *) targetLibIL2CPP);
 
-    //!!! A64HookFunction AKA ARM64, (DOES NOT WORK FOR SOME REASON!) !!!//
-
-    //!!! This template supports ARMV-7 for now, if you know the solution, contribute or issue a page for ARM64 !!!//
-
     hexPatches.GodMode = MemoryPatch::createWithHex(targetLibIL2CPP, //Normal obfuscate
                                                     string2Offset(OBFUSCATE("0x000000")),
                                                     OBFUSCATE("00 00 A0 E3 1E FF 2F E1"));
     //You can also specify target lib like this
     hexPatches.GodMode2 = MemoryPatch::createWithHex("libil2cpp.so",
-                                                     string2Offset(OBFUSCATE_KEY("0x000000", 23479432523588)), //64-bit key in decimal
-                                                     OBFUSCATE_KEY("01 00 A0 E3 1E FF 2F E1", 0x3FE63DF21A3B)); //64-bit key in hex works too
+                                                     string2Offset(OBFUSCATE_KEY("0x000000",
+                                                                                 23479432523588)), //64-bit key in decimal
+                                                     OBFUSCATE_KEY("01 00 A0 E3 1E FF 2F E1",
+                                                                   0x3FE63DF21A3B)); //64-bit key in hex works too
 
-    hooking((void*)getAbsoluteAddress(targetLibIL2CPP, string2Offset(OBFUSCATE_KEY("0x000000", 23479432523588))), (void *) method, (void **)&_method);
-
-    HOOK("0x000000", method2, _method2);
+    HOOK(getAbsoluteAddress(targetLibIL2CPP,
+                               string2Offset(OBFUSCATE_KEY("0x000000", 23479432523588))),
+            method, _method);
 
     LOGI(OBFUSCATE("Done"));
     return NULL;
@@ -185,7 +176,8 @@ Java_com_simplefucker_source_ModMenu_getVisuals(JNIEnv *env, jobject activityObj
 
 JNIEXPORT void JNICALL
 Java_com_simplefucker_source_SavedPrefs_Changes(JNIEnv *env, jclass clazz, jobject obj,
-                                                jint feature, jint value, jboolean boolean, jstring str) {
+                                                jint feature, jint value, jboolean boolean,
+                                                jstring str) {
 
     const char *featureName = env->GetStringUTFChars(str, 0);
 
@@ -204,7 +196,6 @@ Java_com_simplefucker_source_SavedPrefs_Changes(JNIEnv *env, jclass clazz, jobje
     }
 }
 }
-
 
 
 __attribute__((constructor))

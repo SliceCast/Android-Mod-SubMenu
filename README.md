@@ -8,11 +8,7 @@ LGL's Template: https://github.com/LGLTeam/Android-Mod-Menu
 
 KolanHacker Original Template: https://github.com/KolanHacker/-Hard-Android-Menu-
 
-# ARM64 DISCLAIMER!
-For some reason arm64 does not work. If anyone could pull an issue to fix this, it will be all good.
-
-For now, this template supports armv-7
-
+# Preview
 
 ![](https://i.imgur.com/q4KTFED.jpeg)
 

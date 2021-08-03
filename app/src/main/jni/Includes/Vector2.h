@@ -33,7 +33,7 @@
 #pragma once
 
 #define _USE_MATH_DEFINES
-#include "../../../../../../../../AppData/Local/Android/Sdk/ndk/22.0.7026061/sources/cxx-stl/llvm-libc++/include/math.h"
+#include <math.h>
 
 
 struct Vector2
