@@ -42,10 +42,10 @@ public class MainActivity extends Activity {
 
     public String GameActivity = "com.unity3d.player.UnityPlayerActivity";
 
-    public static native void Toast(Context context);
+    //public static native void Toast(Context context);
 
     static {
-        System.loadLibrary("KISE");
+        System.loadLibrary("MyLibName");
     }
 
     @Override
@@ -53,7 +53,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         context = this;
         Start(this);
-        CallToast(getApplicationContext());
         try {
             MainActivity.this.startActivity(new Intent(MainActivity.this, Class.forName(MainActivity.this.GameActivity)));
         } catch (ClassNotFoundException e) {
@@ -98,13 +97,5 @@ public class MainActivity extends Activity {
                 }
             }, 500);
         }
-    }
-
-    public static void CallToast(final Context context) {
-        new Handler().postDelayed(new Runnable() {
-            public void run() {
-                Toast(context);
-            }
-        }, 500);
     }
 }
