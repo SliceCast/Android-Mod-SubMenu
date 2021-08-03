@@ -86,9 +86,6 @@ void *hack_thread(void *) {
 
     LOGI(OBFUSCATE("%s has been loaded"), (const char *) targetLibIL2CPP);
 
-    //!!! A64HookFunction AKA ARM64, (DOES NOT WORK FOR SOME REASON!) !!!//
-
-    //!!! This template supports ARMV-7 for now, if you know the solution, contribute or issue a page for ARM64 !!!//
 
     hexPatches.GodMode = MemoryPatch::createWithHex(targetLibIL2CPP, //Normal obfuscate
                                                     string2Offset(OBFUSCATE("0x000000")),
