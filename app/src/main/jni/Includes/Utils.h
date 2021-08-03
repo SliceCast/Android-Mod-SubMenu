@@ -8,9 +8,16 @@
 #include <string>
 #include <cstdlib>
 #include "Logger.h"
+#if defined(__aarch64__)
+#include <And64InlineHook/And64InlineHook.hpp>
+#else
+#include <Substrate/CydiaSubstrate.h>
+#endif
 
 typedef unsigned long DWORD;
 static uintptr_t libBase;
+
+#define targetLibIL2CPP OBFUSCATE("libil2cpp.so")
 
 bool isGameLibLoaded = false;
 
@@ -91,7 +98,7 @@ DWORD getAbsoluteAddress(const char *libraryName, DWORD relativeAddr) {
 
 extern "C" {
 JNIEXPORT jboolean JNICALL
-Java_uk_lgl_modmenu_FloatingModMenuService_isGameLibLoaded(JNIEnv *env, jobject thiz) {
+Java_com_simplefucker_source_ModMenu_isGameLibLoaded(JNIEnv *env, jobject thiz) {
     return isGameLibLoaded;
 }
 }
