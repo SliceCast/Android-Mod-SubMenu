@@ -32,6 +32,10 @@
 
 #endif
 
+
+
+//If you don't want to use HOOK, you can use this code below.
+//just added this who thought who wanted to use this or not. 
 void hooking(void *orig_fcn, void* new_fcn, void **orig_fcn_ptr)
 {
 #if defined(__aarch64__)
