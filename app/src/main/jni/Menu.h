@@ -1,7 +1,13 @@
 
-bool titleValid = false, headingValid = false, iconValid = false;
+bool titleValid, headingValid, iconValid, settingsValid, isLeeched;
 
 void *antiLeech(void *) {
+    sleep(20);
+
+    if (!titleValid || !headingValid || !iconValid || !settingsValid) {
+        int *p = 0;
+        *p = 0;
+    }
     return NULL;
 }
 
@@ -12,7 +18,7 @@ Java_com_simplefucker_source_ModMenu_Title(JNIEnv *env, jobject thiz) {
     titleValid = true;
 
     //Html is supported
-    return env->NewStringUTF(OBFUSCATE("T05FIEZVQ0s="));
+    return env->NewStringUTF(OBFUSCATE("T05FIEZVQ0s=")); //use Base64 to encode your menu's title.
 }
 
 JNIEXPORT jstring
