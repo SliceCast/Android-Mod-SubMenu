@@ -31,7 +31,9 @@ android {
         }
     }
     ndkVersion = '22.0.7026061'
-    dependencies {
+}
+
+//aide
+dependencies {
         implementation fileTree(dir: 'libs', include: ['*.jar'])
     }
-}
